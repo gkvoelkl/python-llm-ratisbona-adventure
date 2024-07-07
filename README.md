@@ -4,7 +4,7 @@
 
 Du erforscht die Dungeons unter der Stadt Regensburg. Die komplette Handlung und Personen übernimmt ChatGPT oder eine anderes Large Language Model(LLM).
 
-<img src="img/image1.jpg" width="640" align="left"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<img src="img/image1.jpg" width="640" align="left"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## Installation
 
