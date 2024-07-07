@@ -4,7 +4,7 @@
 
 Du erforscht die Dungeons unter der Stadt Regensburg. Die komplette Handlung und Personen übernimmt ChatGPT oder eine anderes Large Language Model(LLM).
 
-<img src="img/image1.jpg" width="640" align="left"><br><br><br><br><br><br><br><br>
+<img src="img/image1.jpg" width="640" align="left"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## Installation
 
@@ -12,7 +12,7 @@ Du erforscht die Dungeons unter der Stadt Regensburg. Die komplette Handlung und
 
 Das Spiel chatAdventure-ratisbona dungeons steht in der Streamlit Cloud frei zur Verfügung.
 
-Einfach auf diesen Link https://cases-murder-mystery-game.streamlit.app klicken
+Einfach auf diesen Link https://radisbona-adventure.streamlit.app klicken
 
 ### Lokale Installation
 
