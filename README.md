@@ -1,5 +1,6 @@
 # chatAdventure - ratisbona dungeons
-
+[![de](https://img.shields.io/badge/lang-de-red.svg)](https://github.com/gkvoelkl/python-llm-ratisbona-adventure/blob/master/README.md)
+[![en](https://img.shields.io/badge/lang-en-green.svg)](https://github.com/gkvoelkl/python-llm-ratisbona-adventure/blob/master/README.en.md)
 <img src="titel.jpg" width="320" align="right"><br><br><br><br><br><br><br><br>
 
 Du erforscht die Dungeons unter der Stadt Regensburg. Die komplette Handlung und Personen übernimmt ChatGPT oder eine anderes Large Language Model(LLM).
@@ -32,8 +33,3 @@ Einfach auf diesen Link https://radisbona-adventure.streamlit.app klicken
 Das Generieren der Bilder ist aktuell nur mit Dall-E und dem entsprechenden API-KEY von OpenAI möglich
 
 <img src="img/image2.jpg" width="640" align="left"><br><br><br><br>
-
-
-```Rust
-
-```

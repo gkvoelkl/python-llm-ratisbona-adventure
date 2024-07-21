@@ -1,5 +1,8 @@
 import streamlit as st
+import json
 from openai import OpenAI
+
+MAX_TOKEN = 4096
 
 title = "ChatAdventure - Ratisbona Dungeons 💬 📚"
 
@@ -23,7 +26,7 @@ läuft so schnell er kann durch eine kaum sichtbare Türe hinter den Regalen.
 
 Da er längere Zeit nicht wieder kommt, gehst du ihm nach.
 
-Viel Treppenstufen führen tief nach unten in einen alten Keller, der aus dem Felsen gehauen ist. 
+Viele Treppenstufen führen tief nach unten in einen alten Keller, der aus dem Felsen gehauen ist. 
 An den Wänden hängen Waffen. Es gibt zwei Türen.“
 
 Der von dir verwendete Tonfall ist entscheidend für die Atmosphäre und macht das Erlebnis ansprechend 
@@ -36,6 +39,7 @@ zu einem neuen Weg führt, der letztlich über Elviras Schicksal entscheidet.
 
 Der alte Buchhändler soll als Figur weiter mitspielen.
 Ein Wolf soll als Begleiter irgendwann in Erscheinung treten.
+Später soll etwas mit Computer und Hacker hinzukommen.
 
 Finde ein paar Wege, die zum Erfolg führen.
 Es gibt Wege, die zum Tod führen. Wenn der Spieler stirbt, generierst du eine Antwort, die den Tod erklärt und mit dem Text „The End“ endet. Dieser beendet das Spiel
@@ -67,7 +71,7 @@ if "model" not in st.session_state:
     with st.form("Model"):
         model = st.selectbox(
             "Bitte wählen Sie das gewünschte LLM aus",
-            ("gpt-4o", "gpt-3.5-turbo", "llama3", "gemma2")
+            ("gpt-4o", "gpt-4o-mini", "gpt-3.5-turbo", "llama3", "gemma2")
         )
         submitted = st.form_submit_button("Weiter")
         if submitted:
@@ -94,6 +98,14 @@ if "model" in st.session_state:
             api_key='ollama'  # required, but unused
         )
 
+def do_language()->None:
+    if st.session_state.messages[-1]["role"] != 'user':
+        st.session_state.messages.append(  # save prompt
+            {"role": "user",
+             "content": f"From now on, use the language {st.session_state.language}"
+             }
+        )
+
 if "client" in st.session_state:
     if "messages" not in st.session_state:
         st.session_state.messages = [
@@ -103,8 +115,29 @@ if "client" in st.session_state:
 
     #sidebar
     st.sidebar.title("ChatAdventure - Ratisbona Dungeons 💬 📚")
-    show_image = st.sidebar.toggle("Bild anzeigen")
+    show_image = st.sidebar.toggle("Show images")
     st.sidebar.image("titel.jpg", width=200)
+    if st.sidebar.button("Save"):
+        with open("messages.json", 'w') as f:
+            f.write(json.dumps(st.session_state.messages))
+    if st.sidebar.button("Load"):
+        with open("messages.json", 'r') as f:
+            st.session_state.messages = json.load(f)
+    if st.sidebar.button("Regenerate"):
+        if st.session_state.messages[-1]["role"] == 'assistant':
+            del st.session_state.messages[-1]
+    if st.sidebar.button("Undo"):
+        if len(st.session_state.messages) > 1:
+            if st.session_state.messages[-1]["role"] == 'assistant':
+                if st.session_state.messages[-2]["role"] == 'user':
+                    del st.session_state.messages[-1]
+                    del st.session_state.messages[-1]
+    language = st.sidebar.selectbox(
+        "Language",
+        ("German", "English", "French", "Spain"),
+        key="language",
+        on_change=do_language,
+    )
 
     # -- ask user
     if prompt := st.chat_input("Deine Antwort"):
@@ -128,6 +161,7 @@ if "client" in st.session_state:
                         for m in st.session_state.messages
                     ],
                     stream=True,
+                    max_tokens=MAX_TOKEN
                 )
 
                 response = st.write_stream(stream)
