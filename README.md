@@ -13,7 +13,7 @@ Du erforscht die Dungeons unter der Stadt Regensburg. Die komplette Handlung und
 
 Das Spiel chatAdventure-ratisbona dungeons steht in der Streamlit Cloud frei zur Verfügung.
 
-Einfach auf diesen Link https://radisbona-adventure.streamlit.app klicken
+Einfach auf diesen Link https://ratisbona-adventure.streamlit.app klicken
 
 ### Lokale Installation
 
